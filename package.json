@@ -1,0 +1,16 @@
+{
+  "name": "tart-mailer-node",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
+  "author": {
+      "name": "Mert Doğar",
+      "email": "mertdogar@gmail.com"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "request": "2.34.0"
+  }
+}
