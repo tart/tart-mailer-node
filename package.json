@@ -1,7 +1,14 @@
 {
   "name": "tart-mailer-node",
+  "homepage": "https://github.com/tart/tart-mailer-node",
+  "bugs": {
+    "url": "https://github.com/tart/tart-mailer-node/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tart/tart-mailer-node.git"
+  },
   "version": "0.0.1",
-  "private": true,
   "main": "index.js",
   "author": {
       "name": "Mert Doğar",
