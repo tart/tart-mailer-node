@@ -1,5 +1,7 @@
 {
   "name": "tart-mailer-node",
+  "description": "Node.js API client for tart-mailer",
+  "license": "ICS",
   "homepage": "https://github.com/tart/tart-mailer-node",
   "bugs": {
     "url": "https://github.com/tart/tart-mailer-node/issues"
