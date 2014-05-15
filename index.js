@@ -15,15 +15,14 @@
 
 var request = require('request');
 
-function tartMailer(opt) {
-    this.options = {
-        url: opt.url,
-        json: true,
-        auth: opt.auth
-    };
+function tartMailer(options) {
+    this.root = options.url;
+    this.auth = options.auth;
 }
 
 tartMailer.prototype.request = function(options, callback) {
+    options.auth = this.auth;
+
     request(options, function(err, httpResponse, body) {
         if(!err && httpResponse.statusCode >= 400)
             err = 'err: ' + httpResponse.statusCode;
@@ -32,21 +31,100 @@ tartMailer.prototype.request = function(options, callback) {
     });
 };
 
-tartMailer.prototype.subscribe = function(email, opt_data, callback) {
+tartMailer.prototype.getSender = function(callback) {
     return this.request({
-        url: this.options.url + 'subscriber/' + email,
+        url: this.root + 'sender',
+        method: 'GET'
+    }, callback);
+};
+
+tartMailer.prototype.setSender = function(data, callback) {
+    return this.request({
+        url: this.root + 'sender',
         method: 'PUT',
-        json: opt_data || true,
-        auth: this.options.auth
+        json: data
+    }, callback);
+};
+
+tartMailer.prototype.addEmail = function(data, callback) {
+    return this.request({
+        url: this.root + 'email',
+        method: 'POST',
+        json: data
+    }, callback);
+};
+
+tartMailer.prototype.listEmails = function(callback) {
+    return this.request({
+        url: this.root + 'email/list',
+        method: 'GET'
+    }, callback);
+};
+
+tartMailer.prototype.addEmailVariation = function(emailId, data, callback) {
+    return this.request({
+        url: this.root + 'email/' + emailId + '/variation',
+        method: 'POST',
+        json: data
+    }, callback);
+};
+
+tartMailer.prototype.getEmail = function(emailId, callback) {
+    return this.request({
+        url: this.root + 'email/' + emailId,
+        method: 'GET'
+    }, callback);
+};
+
+tartMailer.prototype.getEmailVariation = function(emailId, variationId, callback) {
+    return this.request({
+        url: this.root + 'email/' + emailId + '/variation/' + variationId,
+        method: 'GET'
+    }, callback);
+};
+
+tartMailer.prototype.listMessagesSend = function(emailId, callback) {
+    return this.request({
+        url: this.root + 'email/' + emailId + '/send/list',
+        method: 'GET'
+    }, callback);
+};
+
+tartMailer.prototype.upsertEmailVariation = function(emailId, variationId, data, callback) {
+    return this.request({
+        url: this.root + 'email/' + emailId + '/variation/' + variationId,
+        method: 'PUT',
+        json: data
     }, callback);
 };
 
 tartMailer.prototype.listSubscribers = function(callback) {
     return this.request({
-        url: this.options.url + 'subscriber/list',
-        method: 'GET',
-        json: true,
-        auth: this.options.auth
+        url: this.root + 'subscriber/list',
+        method: 'GET'
+    }, callback);
+};
+
+tartMailer.prototype.subscribe = function(fromAddress, data, callback) {
+    return this.request({
+        url: this.root + 'subscriber/' + fromAddress,
+        method: 'PUT',
+        json: data
+    }, callback);
+};
+
+tartMailer.prototype.sendToSubscriber = function(fromAddress, data, callback) {
+    return this.request({
+        url: this.root + 'subscriber/' + fromAddress + '/send',
+        method: 'POST',
+        json: data
+    }, callback);
+};
+
+tartMailer.prototype.listMessagesSendToSubscriber = function(fromAddress, callback) {
+    return this.request({
+        url: this.root + 'subscriber/' + fromAddress + '/send/list',
+        method: 'GET'
     }, callback);
 };
 

@@ -25,8 +25,43 @@ var client = new tartMailer({
 });
 
 var tests = [
+    ['getSender'],
+    ['setSender', {'fromName': 'Osman'}],
+    ['addEmail', {
+        'bulk': true,
+        'redirectURL': 'http://tr.wikipedia.org',
+        'variations': [
+            {
+                'subject': 'Wiki',
+                'plainbody': 'Check out Wikipedia.'
+            },
+            {
+                'subject': 'Wikipedia',
+                'plainbody': 'Try Wikipedia.'
+            }
+        ]
+    }],
+    ['listEmails'],
+    ['addEmailVariation', 1, {
+        'subject': 'Extra Variation',
+        'plainBody': 'This is the one.'
+    }],
+    ['getEmail', 1],
+    ['getEmailVariation', 1, 1],
+    ['upsertEmailVariation', 1, 2, {
+        'subject': 'Extra Variation',
+        'plainBody': 'This is the second.'
+    }],
+    ['listMessagesSend', 1],
+    ['listSubscribers'],
     ['subscribe', 'osman@spam.bo', {}],
-    ['listSubscribers']
+    ['sendToSubscriber', 'osman@spam.bo', {
+        'redirectURL': 'http://click.xxx/?from=mailer',
+        'subject': 'Click this link!',
+        'plainBody': 'Click: {redirecturl}',
+        'hTMLBody': '<h1>XXX</h1><p><a href=\'{redirecturl}\'>click</a></p>'
+    }],
+    ['listMessagesSendToSubscriber', 'osman@spam.bo']
 ];
 
 run();
