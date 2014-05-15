@@ -21,40 +21,33 @@ function tartMailer(opt) {
         json: true,
         auth: opt.auth
     };
+}
+
+tartMailer.prototype.request = function(options, callback) {
+    request(options, function(err, httpResponse, body) {
+        if(!err && httpResponse.statusCode >= 400)
+            err = 'err: ' + httpResponse.statusCode;
+
+        callback(err, body);
+    });
 };
 
-tartMailer.prototype.subscribe = function(email, opt_data, cb) {
-    var options = {
+tartMailer.prototype.subscribe = function(email, opt_data, callback) {
+    return this.request({
         url: this.options.url + 'subscriber/' + email,
         method: 'PUT',
         json: opt_data || true,
         auth: this.options.auth
-    };
-
-    request(options, function(err, httpResponse, body) {
-        if(err) return cb(err);
-
-        if(httpResponse.statusCode != 200) return cb('err: ' + httpResponse.statusCode);
-
-        cb(null, body);
-    });
+    }, callback);
 };
 
-tartMailer.prototype.listSubscribers = function(cb) {
-    var options = {
+tartMailer.prototype.listSubscribers = function(callback) {
+    return this.request({
         url: this.options.url + 'subscriber/list',
         method: 'GET',
         json: true,
         auth: this.options.auth
-    };
-
-    request(options, function(err, httpResponse, body) {
-        if(err) return cb(err);
-
-        if(httpResponse.statusCode != 200) return cb('err: ' + httpResponse.statusCode);
-
-        cb(null, body);
-    });
-}
+    }, callback);
+};
 
 module.exports = tartMailer;
