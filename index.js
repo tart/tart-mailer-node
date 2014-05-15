@@ -42,7 +42,7 @@ tartMailer.prototype.subscribe = function(email, opt_data, cb) {
 
 tartMailer.prototype.listSubscribers = function(cb) {
     var options = {
-        url: this.options.url + 'subscriber',
+        url: this.options.url + 'subscriber/list',
         method: 'GET',
         json: true,
         auth: this.options.auth
