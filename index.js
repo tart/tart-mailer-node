@@ -61,6 +61,14 @@ tartMailer.prototype.listEmails = function(callback) {
     }, callback);
 };
 
+tartMailer.prototype.filterEmails = function(data, callback) {
+    return this.request({
+        url: this.root + 'email/list',
+        method: 'POST',
+        json: data
+    }, callback);
+};
+
 tartMailer.prototype.addEmailVariation = function(emailId, data, callback) {
     return this.request({
         url: this.root + 'email/' + emailId + '/variation',
@@ -90,6 +98,14 @@ tartMailer.prototype.listMessagesSend = function(emailId, callback) {
     }, callback);
 };
 
+tartMailer.prototype.filterMessagesSend = function(emailId, data, callback) {
+    return this.request({
+        url: this.root + 'email/' + emailId + '/send/list',
+        method: 'POST',
+        json: data
+    }, callback);
+};
+
 tartMailer.prototype.upsertEmailVariation = function(emailId, variationId, data, callback) {
     return this.request({
         url: this.root + 'email/' + emailId + '/variation/' + variationId,
@@ -102,6 +118,14 @@ tartMailer.prototype.listSubscribers = function(callback) {
     return this.request({
         url: this.root + 'subscriber/list',
         method: 'GET'
+    }, callback);
+};
+
+tartMailer.prototype.filterSubscribers = function(data, callback) {
+    return this.request({
+        url: this.root + 'subscriber/list',
+        method: 'POST',
+        json: data
     }, callback);
 };
 
@@ -125,6 +149,14 @@ tartMailer.prototype.listMessagesSendToSubscriber = function(fromAddress, callba
     return this.request({
         url: this.root + 'subscriber/' + fromAddress + '/send/list',
         method: 'GET'
+    }, callback);
+};
+
+tartMailer.prototype.filterMessagesSendToSubscriber = function(fromAddress, data, callback) {
+    return this.request({
+        url: this.root + 'subscriber/' + fromAddress + '/send/list',
+        method: 'POST',
+        json: data
     }, callback);
 };
 

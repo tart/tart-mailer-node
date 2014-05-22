@@ -42,6 +42,9 @@ var tests = [
         ]
     }],
     ['listEmails'],
+    ['filterEmails', {
+        'bulk': true
+    }],
     ['addEmailVariation', 1, {
         'subject': 'Extra Variation',
         'plainBody': 'This is the one.'
@@ -53,15 +56,33 @@ var tests = [
         'plainBody': 'This is the second.'
     }],
     ['listMessagesSend', 1],
+    ['filterMessagesSend', 1, {
+        'sent': false
+    }],
     ['listSubscribers'],
-    ['subscribe', 'osman@spam.bo', {}],
+    ['subscribe', 'osman@spam.bo', {
+        'locale': 'tr_TR',
+        'properties': {
+            'firstname': 'Osman',
+            'lastname': 'Kabalak'
+        }
+    }],
+    ['filterSubscribers', {
+        'locale': 'tr_TR',
+        'properties': {
+            'firstname': 'Osman'
+        }
+    }],
     ['sendToSubscriber', 'osman@spam.bo', {
         'redirectURL': 'http://click.xxx/?from=mailer',
         'subject': 'Click this link!',
         'plainBody': 'Click: {redirecturl}',
         'hTMLBody': '<h1>XXX</h1><p><a href=\'{redirecturl}\'>click</a></p>'
     }],
-    ['listMessagesSendToSubscriber', 'osman@spam.bo']
+    ['listMessagesSendToSubscriber', 'osman@spam.bo'],
+    ['filterMessagesSendToSubscriber', 'osman@spam.bo', {
+        'sent': false
+    }]
 ];
 
 run();
