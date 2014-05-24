@@ -1,7 +1,16 @@
 {
   "name": "tart-mailer-node",
-  "version": "0.0.1",
-  "private": true,
+  "description": "Node.js API client for tart-mailer",
+  "license": "ICS",
+  "homepage": "https://github.com/tart/tart-mailer-node",
+  "bugs": {
+    "url": "https://github.com/tart/tart-mailer-node/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tart/tart-mailer-node.git"
+  },
+  "version": "1.2.0",
   "main": "index.js",
   "author": {
       "name": "Mert Doğar",
