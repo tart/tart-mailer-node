@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/tart/tart-mailer-node.git"
   },
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "index.js",
   "author": {
       "name": "Mert Doğar",
