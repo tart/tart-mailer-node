@@ -129,32 +129,32 @@ tartMailer.prototype.filterSubscribers = function(data, callback) {
     }, callback);
 };
 
-tartMailer.prototype.subscribe = function(fromAddress, data, callback) {
+tartMailer.prototype.subscribe = function(toAddress, data, callback) {
     return this.request({
-        url: this.root + 'subscriber/' + fromAddress,
+        url: this.root + 'subscriber/' + toAddress,
         method: 'PUT',
         json: data
     }, callback);
 };
 
-tartMailer.prototype.sendToSubscriber = function(fromAddress, data, callback) {
+tartMailer.prototype.sendToSubscriber = function(toAddress, data, callback) {
     return this.request({
-        url: this.root + 'subscriber/' + fromAddress + '/send',
+        url: this.root + 'subscriber/' + toAddress + '/send',
         method: 'POST',
         json: data
     }, callback);
 };
 
-tartMailer.prototype.listMessagesSendToSubscriber = function(fromAddress, callback) {
+tartMailer.prototype.listMessagesSendToSubscriber = function(toAddress, callback) {
     return this.request({
-        url: this.root + 'subscriber/' + fromAddress + '/send/list',
+        url: this.root + 'subscriber/' + toAddress + '/send/list',
         method: 'GET'
     }, callback);
 };
 
-tartMailer.prototype.filterMessagesSendToSubscriber = function(fromAddress, data, callback) {
+tartMailer.prototype.filterMessagesSendToSubscriber = function(toAddress, data, callback) {
     return this.request({
-        url: this.root + 'subscriber/' + fromAddress + '/send/list',
+        url: this.root + 'subscriber/' + toAddress + '/send/list',
         method: 'POST',
         json: data
     }, callback);
